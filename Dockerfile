@@ -1,9 +1,11 @@
-# Use the official nginx image as the base
+# Dockerfile
 FROM nginx:alpine
 
-# Copy the HTML and JavaScript files to the default nginx directory
 COPY index.html /usr/share/nginx/html/index.html
 COPY app.js /usr/share/nginx/html/app.js
 
-# Expose port 80
-EXPOSE 80
+# Railway usa una variable de entorno `PORT` que puede ser definida así:
+ENV PORT 80
+
+EXPOSE $PORT
+CMD ["nginx", "-g", "daemon off;"]
